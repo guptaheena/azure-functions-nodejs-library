@@ -11,6 +11,7 @@ import {
     HttpHandler,
     HttpMethod,
     HttpMethodFunctionOptions,
+	MySqlFunctionOptions,
     ServiceBusQueueFunctionOptions,
     ServiceBusTopicFunctionOptions,
     SqlFunctionOptions,
@@ -133,6 +134,10 @@ export function warmup(name: string, options: WarmupFunctionOptions): void {
 
 export function sql(name: string, options: SqlFunctionOptions): void {
     generic(name, convertToGenericOptions(options, trigger.sql));
+}
+
+export function mySql(name: string, options: MySqlFunctionOptions): void {
+    generic(name, convertToGenericOptions(options, trigger.mySql));
 }
 
 export function generic(name: string, options: GenericFunctionOptions): void {

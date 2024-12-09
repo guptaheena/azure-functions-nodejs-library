@@ -6,6 +6,8 @@ import {
     CosmosDBInputOptions,
     FunctionInput,
     GenericInputOptions,
+	MySqlInput,
+	MySqlInputOptions,
     SqlInput,
     SqlInputOptions,
     StorageBlobInput,
@@ -40,6 +42,13 @@ export function sql(options: SqlInputOptions): SqlInput {
     return addInputBindingName({
         ...options,
         type: 'sql',
+    });
+}
+
+export function mySql(options: MySqlInputOptions): MySqlInput {
+    return addInputBindingName({
+        ...options,
+        type: 'mysql',
     });
 }
 

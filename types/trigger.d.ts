@@ -7,6 +7,7 @@ import { EventHubTrigger, EventHubTriggerOptions } from './eventHub';
 import { GenericTriggerOptions } from './generic';
 import { HttpTrigger, HttpTriggerOptions } from './http';
 import { FunctionTrigger } from './index';
+import { MySqlTrigger, MySqlTriggerOptions } from './mySql';
 import {
     ServiceBusQueueTrigger,
     ServiceBusQueueTriggerOptions,
@@ -77,6 +78,11 @@ export function warmup(options: WarmupTriggerOptions): WarmupTrigger;
  * [Link to docs and examples](https://docs.microsoft.com/azure/azure-functions/functions-bindings-azure-sql-trigger?pivots=programming-language-javascript)
  */
 export function sql(options: SqlTriggerOptions): SqlTrigger;
+
+/**
+ * [Link to docs and examples](To be updated)
+ */
+export function mySql(options: MySqlTriggerOptions): MySqlTrigger;
 
 /**
  * A generic option that can be used for any trigger type
