@@ -11,7 +11,7 @@ import {
     HttpHandler,
     HttpMethod,
     HttpMethodFunctionOptions,
-	MySqlFunctionOptions,
+    MySqlFunctionOptions,
     ServiceBusQueueFunctionOptions,
     ServiceBusTopicFunctionOptions,
     SqlFunctionOptions,
