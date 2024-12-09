@@ -12,7 +12,7 @@ import {
     GenericOutputOptions,
     HttpOutput,
     HttpOutputOptions,
-	MySqlOutput,
+    MySqlOutput,
     MySqlOutputOptions,
     ServiceBusQueueOutput,
     ServiceBusQueueOutputOptions,
