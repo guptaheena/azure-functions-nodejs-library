@@ -4,6 +4,7 @@
 import { serialize as serializeCookie } from 'cookie';
 import { EventEmitter } from 'events';
 import * as http from 'http';
+import * as net from 'net';
 import { AzFuncSystemError, ensureErrorType } from '../errors';
 import { nonNullProp } from '../utils/nonNull';
 import { workerSystemLog } from '../utils/workerSystemLog';
@@ -11,6 +12,8 @@ import { HttpResponse } from './HttpResponse';
 
 const requests: Record<string, http.IncomingMessage> = {};
 const responses: Record<string, http.ServerResponse> = {};
+const minPort = 55000;
+const maxPort = 55025;
 
 const invocRequestEmitter = new EventEmitter();
 
@@ -105,8 +108,24 @@ export async function setupHttpProxy(): Promise<string> {
 
         server.listen(() => {
             const address = server.address();
+            // Valid address has been created
             if (address !== null && typeof address === 'object') {
-                resolve(`http://localhost:${address.port}/`);
+                if (address.port === 0) {
+                    // Auto-assigned port is 0, find and bind to an open port
+                    workerSystemLog('debug', `Port 0 assigned. Finding open port.`);
+                    findOpenPort((openPort: number) => {
+                        // Close the server and re-listen on the found open port
+                        server.close();
+                        server.listen(openPort, () => {
+                            workerSystemLog('debug', `Server is now listening on found open port: ${openPort}`);
+                        });
+                        resolve(`http://localhost:${openPort}/`);
+                    });
+                } else {
+                    // Auto-assigned port is not 0
+                    workerSystemLog('debug', `Auto-assigned port is valid. Port: ${address.port}`);
+                    resolve(`http://localhost:${address.port}/`);
+                }
             } else {
                 reject(new AzFuncSystemError('Unexpected server address during http proxy setup'));
             }
@@ -116,4 +135,39 @@ export async function setupHttpProxy(): Promise<string> {
             workerSystemLog('information', 'Http proxy closing');
         });
     });
+}
+
+// Function to find an open port starting from a specified port
+function findOpenPort(callback: (port: number) => void): void {
+    const server = net.createServer();
+
+    function tryPort(port: number) {
+        if (port > maxPort) {
+            // If we've reached the maximum port, throw an error
+            throw new AzFuncSystemError(
+                `No available ports found between ${minPort} and ${maxPort}. To enable HTTP streaming, please open a port in this range.`
+            );
+        }
+
+        server.once('error', () => {
+            // If the port is unavailable, increment and try the next one
+            tryPort(port + 1);
+        });
+
+        // If the port is available, return it
+        server.once('listening', () => {
+            const address = server.address();
+            if (address !== null && typeof address === 'object') {
+                port = address.port;
+                server.close();
+                callback(port);
+            }
+        });
+
+        // Try binding to the given port
+        server.listen(port);
+    }
+
+    // Start trying from the specified starting port
+    tryPort(minPort);
 }
