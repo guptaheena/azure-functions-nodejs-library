@@ -145,7 +145,7 @@ export interface InvocationContextExtraInputs {
      * Set a secondary generic input for this invocation
      * @inputOrName the configuration object or name for this input
      * @value the input value
-     */ 
+     */
     set(inputOrName: FunctionInput | string, value: unknown): void;
 }
 
