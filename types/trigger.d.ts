@@ -80,7 +80,7 @@ export function warmup(options: WarmupTriggerOptions): WarmupTrigger;
 export function sql(options: SqlTriggerOptions): SqlTrigger;
 
 /**
- * [Link to docs and examples](To be updated)
+ * [Link to docs and examples](https://learn.microsoft.com/en-us/azure/azure-functions/functions-bindings-azure-mysql-trigger?pivots=programming-language-javascript)
  */
 export function mySql(options: MySqlTriggerOptions): MySqlTrigger;
 
