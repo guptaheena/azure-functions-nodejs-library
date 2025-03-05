@@ -23,6 +23,7 @@ import {
 } from './storage';
 import { TimerTrigger, TimerTriggerOptions } from './timer';
 import { WarmupTrigger, WarmupTriggerOptions } from './warmup';
+import { WebPubSubTrigger, WebPubSubTriggerOptions } from './webpubsub';
 
 /**
  * [Link to docs and examples](https://docs.microsoft.com/azure/azure-functions/functions-bindings-http-webhook-trigger?&pivots=programming-language-javascript)
@@ -83,6 +84,11 @@ export function sql(options: SqlTriggerOptions): SqlTrigger;
  * [Link to docs and examples](https://learn.microsoft.com/en-us/azure/azure-functions/functions-bindings-azure-mysql-trigger?pivots=programming-language-javascript)
  */
 export function mySql(options: MySqlTriggerOptions): MySqlTrigger;
+
+/**
+ * [Link to docs and examples](https://docs.microsoft.com/azure/azure-functions/functions-bindings-web-pubsub-trigger?pivots=programming-language-javascript)
+ */
+export function webPubSub(options: WebPubSubTriggerOptions): WebPubSubTrigger;
 
 /**
  * A generic option that can be used for any trigger type

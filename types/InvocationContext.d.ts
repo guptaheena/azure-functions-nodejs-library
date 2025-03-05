@@ -11,6 +11,7 @@ import { ServiceBusQueueOutput, ServiceBusTopicOutput } from './serviceBus';
 import { SqlInput, SqlOutput } from './sql';
 import { StorageBlobInput, StorageBlobOutput, StorageQueueOutput } from './storage';
 import { TableInput, TableOutput } from './table';
+import { WebPubSubOutput } from './webpubsub';
 
 /**
  * Contains metadata and helper methods specific to this invocation
@@ -229,6 +230,13 @@ export interface InvocationContextExtraOutputs {
      * @documents the output item(s) value
      */
     set(output: MySqlOutput, items: unknown): void;
+
+    /**
+     * Set a secondary Web PubSub output for this invocation
+     * @output the configuration object for this Web PubSub output
+     * @message the output message(s) value
+     */
+    set(output: WebPubSubOutput, messages: unknown): void;
 
     /**
      * Set a secondary generic output for this invocation

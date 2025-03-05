@@ -26,6 +26,8 @@ import {
     StorageQueueOutputOptions,
     TableOutput,
     TableOutputOptions,
+    WebPubSubOutput,
+    WebPubSubOutputOptions,
 } from '@azure/functions';
 import { addBindingName } from './addBindingName';
 
@@ -103,6 +105,13 @@ export function mySql(options: MySqlOutputOptions): MySqlOutput {
     return addOutputBindingName({
         ...options,
         type: 'mysql',
+    });
+}
+
+export function webPubSub(options: WebPubSubOutputOptions): WebPubSubOutput {
+    return addOutputBindingName({
+        ...options,
+        type: 'webPubSub',
     });
 }
 

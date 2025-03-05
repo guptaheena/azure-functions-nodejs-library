@@ -19,6 +19,7 @@ import {
     StorageQueueFunctionOptions,
     TimerFunctionOptions,
     WarmupFunctionOptions,
+    WebPubSubFunctionOptions,
 } from '@azure/functions';
 import { FunctionCallback } from '@azure/functions-core';
 import { toCoreFunctionMetadata } from './converters/toCoreFunctionMetadata';
@@ -138,6 +139,10 @@ export function sql(name: string, options: SqlFunctionOptions): void {
 
 export function mySql(name: string, options: MySqlFunctionOptions): void {
     generic(name, convertToGenericOptions(options, trigger.mySql));
+}
+
+export function webPubSub(name: string, options: WebPubSubFunctionOptions): void {
+    generic(name, convertToGenericOptions(options, trigger.webPubSub));
 }
 
 export function generic(name: string, options: GenericFunctionOptions): void {

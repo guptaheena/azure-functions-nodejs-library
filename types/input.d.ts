@@ -8,6 +8,12 @@ import { SqlInput, SqlInputOptions } from './sql';
 import { StorageBlobInput, StorageBlobInputOptions } from './storage';
 import { TableInput, TableInputOptions } from './table';
 import { MySqlInput, MySqlInputOptions } from './mySql';
+import {
+    WebPubSubConnectionInput,
+    WebPubSubConnectionInputOptions,
+    WebPubSubContextInput,
+    WebPubSubContextInputOptions,
+} from './webpubsub';
 
 /**
  * [Link to docs and examples](https://docs.microsoft.com/azure/azure-functions/functions-bindings-storage-blob-input?pivots=programming-language-javascript)
@@ -33,6 +39,16 @@ export function sql(options: SqlInputOptions): SqlInput;
  * [Link to docs and examples](https://learn.microsoft.com/en-us/azure/azure-functions/functions-bindings-azure-mysql-input?pivots=programming-language-javascript)
  */
 export function mySql(options: MySqlInputOptions): MySqlInput;
+
+/**
+ * [Link to docs and examples](https://docs.microsoft.com/azure/azure-functions/functions-bindings-web-pubsub-input?pivots=programming-language-javascript)
+ */
+export function webPubSubConnection(options: WebPubSubConnectionInputOptions): WebPubSubConnectionInput;
+
+/**
+ * [Link to docs and examples](https://docs.microsoft.com/azure/azure-functions/functions-bindings-web-pubsub-input?pivots=programming-language-javascript)
+ */
+export function webPubSubContext(options: WebPubSubContextInputOptions): WebPubSubContextInput;
 
 /**
  * A generic option that can be used for any input type

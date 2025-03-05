@@ -28,6 +28,8 @@ import {
     TimerTriggerOptions,
     WarmupTrigger,
     WarmupTriggerOptions,
+    WebPubSubTrigger,
+    WebPubSubTriggerOptions,
 } from '@azure/functions';
 import { addBindingName } from './addBindingName';
 
@@ -114,6 +116,13 @@ export function mySql(options: MySqlTriggerOptions): MySqlTrigger {
     return addTriggerBindingName({
         ...options,
         type: 'mysqlTrigger',
+    });
+}
+
+export function webPubSub(options: WebPubSubTriggerOptions): WebPubSubTrigger {
+    return addTriggerBindingName({
+        ...options,
+        type: 'webPubSubTrigger',
     });
 }
 

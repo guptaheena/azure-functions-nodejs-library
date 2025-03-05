@@ -14,6 +14,10 @@ import {
     StorageBlobInputOptions,
     TableInput,
     TableInputOptions,
+    WebPubSubConnectionInput,
+    WebPubSubConnectionInputOptions,
+    WebPubSubContextInput,
+    WebPubSubContextInputOptions,
 } from '@azure/functions';
 import { addBindingName } from './addBindingName';
 
@@ -49,6 +53,20 @@ export function mySql(options: MySqlInputOptions): MySqlInput {
     return addInputBindingName({
         ...options,
         type: 'mysql',
+    });
+}
+
+export function webPubSubConnection(options: WebPubSubConnectionInputOptions): WebPubSubConnectionInput {
+    return addInputBindingName({
+        ...options,
+        type: 'webPubSubConnection',
+    });
+}
+
+export function webPubSubContext(options: WebPubSubContextInputOptions): WebPubSubContextInput {
+    return addInputBindingName({
+        ...options,
+        type: 'webPubSubContext',
     });
 }
 
